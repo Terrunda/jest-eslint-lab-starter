@@ -52,3 +52,29 @@ describe("capitalize words", () =>{
         expect(capitalizeWords("s")).toBe("S");
     });
 });
+
+describe("Filter active users: ", () =>{
+    test("An array with mixed active/inactive users", () => {
+        const usersTest = [
+            { name: "Alice", isActive: true},
+            { name: "Bob", isActive: false}
+        ];
+        const expectedResult = [{ name: "Alice", isActive: true}];
+        expect(filterActiveUsers(usersTest)).toEqual(expectedResult);
+    });
+    
+    test('returns an empty array when all users are inactive', () => {
+        const users = [
+            { name: "Alice", isActive: false},
+            { name: "Bob", isActive: false},
+        ];
+        const expected = [];
+        expect(filterActiveUsers(users)).toEqual(expected);
+    });
+
+    test("An empty array being passed as an argument", () => {
+        const emptyArray = [];
+        const emptyResult = [];
+        expect(filterActiveUsers(emptyArray)).toEqual(emptyResult);
+    });
+});
