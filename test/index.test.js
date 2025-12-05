@@ -1,2 +1,2 @@
-const { capitalizeWords, filterActiveUsers, logAction } = require('../index')
+const { capitalizeWords, filterActiveUsers, logAction } = require('../index');
 
