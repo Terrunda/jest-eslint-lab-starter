@@ -31,3 +31,24 @@ function logAction(action, username) {
 }
 
 module.exports = { capitalizeWords, filterActiveUsers, logAction };
+
+describe("capitalize words", () =>{
+    test('should capitalize the first letter of each word in a standard sentence(AKA normal case)', () => {
+    const input = "hello world";
+    const expected = "Hello World";
+    expect(capitalizeWords(input)).toBe(expected);
+    });
+
+    test("An empty string input: ", () =>{
+        expect(capitalizeWords("")).toBe("");
+    });
+
+    test("String with special characters: ", () =>{
+        expect(capitalizeWords("hello-world")).toBe("Hello-World");
+    });
+
+
+    test("Test for single-world strings: ", () => {
+        expect(capitalizeWords("s")).toBe("S");
+    });
+});
