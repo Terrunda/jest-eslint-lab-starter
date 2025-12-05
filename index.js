@@ -78,3 +78,39 @@ describe("Filter active users: ", () =>{
         expect(filterActiveUsers(emptyArray)).toEqual(emptyResult);
     });
 });
+
+describe("Testing log action", () => {
+    test("Generation of the correct log string for valid inputs", () =>{
+        const expectedTimeStamp = new Date().toISOString();
+        const expectedMessage = `User Alice performed login at ${expectedTimeStamp}`;
+        expect(logAction("login","Alice")).toEqual(expectedMessage);
+    });
+
+    test('Edge case of handling missing argument for action', () => {
+        const expectedTimeStamp = new Date().toISOString();
+        expect(() => logAction(undefined, 'Alice')).not.toThrow();
+        const logMessage = logAction(undefined, 'Alice');
+        expect(logMessage).toContain(`User Alice performed undefined at ${expectedTimeStamp}`);
+  });
+
+  test("Edge case of handing missing argument for username", () => {
+    const expectedTimeStamp = new Date().toISOString();
+    expect(() => logAction("login", undefined)).not.toThrow();
+        const logMessage = logAction("login", undefined);
+        expect(logMessage).toContain(`User undefined performed login at ${expectedTimeStamp}`);
+  });
+  
+  test("Edge case of handling empty string passed as arguments for action", () => {
+    const expectedTimeStamp = new Date().toISOString();
+    expect(() => logAction("", "Alice")).not.toThrow();
+        const logMessage = logAction("", "Alice");
+        expect(logMessage).toContain(`User Alice performed  at ${expectedTimeStamp}`);
+  });
+
+  test("Edge case of handling empty string passed as arguments for username", () => {
+    const expectedTimeStamp = new Date().toISOString();
+    expect(() => logAction("login", "")).not.toThrow();
+        const logMessage = logAction("login", "");
+        expect(logMessage).toContain(`User  performed login at ${expectedTimeStamp}`);
+  });
+});
